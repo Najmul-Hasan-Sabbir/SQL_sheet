@@ -1,6 +1,6 @@
 📊 SQL Data Analysis Repository
 
-Welcome to my SQL Data Analysis repository! 🚀 This project showcases my expertise in SQL, from basic to advanced techniques, for core data analysis tasks. It covers data cleaning, EDA, handling duplicates, NULLs, updates, CTEs, window functions, and optimization. Perfect for data analyst roles, it demonstrates my ability to transform large datasets into actionable insights. Explore below! 🔍
+Welcome to my SQL Data Analysis repository! 🚀 This project showcases my expertise in SQL, from basic to advanced techniques, for core data analysis tasks. It covers data cleaning, finding duplicates, updating data, handling NULLs, EDA, CTEs, window functions, and optimization. Perfect for data analyst roles, it demonstrates my ability to transform large datasets into actionable insights. Explore below! 🔍
 
 
 
@@ -51,39 +51,7 @@ Example: Standardize text by trimming spaces.
 SELECT TRIM(customer_name) AS cleaned_name, customer_id
 FROM customers;
 
-Output:
-
-
-
-
-
-
-
-cleaned_name
-
-
-
-customer_id
-
-
-
-
-
-John Doe
-
-
-
-101
-
-
-
-
-
-Jane Smith
-
-
-
-102
+Output: Returns cleaned names like "John Doe" (customer_id: 101) and "Jane Smith" (customer_id: 102).
 
 
 
@@ -98,39 +66,7 @@ FROM customers
 GROUP BY email
 HAVING COUNT(*) > 1;
 
-Output:
-
-
-
-
-
-
-
-email
-
-
-
-count
-
-
-
-
-
-john.doe@email.com
-
-
-
-2
-
-
-
-
-
-jane.smith@email.com
-
-
-
-2
+Output: Shows emails like "john.doe@email.com" (count: 2) and "jane.smith@email.com" (count: 2).
 
 
 
@@ -144,39 +80,7 @@ UPDATE customers
 SET region = 'Unknown'
 WHERE region IS NULL;
 
-Output (after update):
-
-
-
-
-
-
-
-customer_id
-
-
-
-region
-
-
-
-
-
-101
-
-
-
-Unknown
-
-
-
-
-
-102
-
-
-
-West
+Output: Updates records, e.g., customer_id 101 now has region "Unknown", while 102 remains "West".
 
 
 
@@ -189,39 +93,7 @@ Example: Replace NULL sales amounts with 0.
 SELECT customer_id, COALESCE(amount, 0) AS amount
 FROM sales;
 
-Output:
-
-
-
-
-
-
-
-customer_id
-
-
-
-amount
-
-
-
-
-
-101
-
-
-
-500
-
-
-
-
-
-102
-
-
-
-0
+Output: Shows customer_id 101 with amount 500, and customer_id 102 with amount 0.
 
 
 
@@ -236,39 +108,7 @@ FROM sales
 GROUP BY region
 ORDER BY total_sales DESC;
 
-Output:
-
-
-
-
-
-
-
-region
-
-
-
-total_sales
-
-
-
-
-
-West
-
-
-
-15000
-
-
-
-
-
-East
-
-
-
-12000
+Output: Lists regions like "West" (total_sales: 15000) and "East" (total_sales: 12000).
 
 
 
@@ -288,39 +128,7 @@ SELECT customer_id, order_count
 FROM repeat_customers
 ORDER BY order_count DESC;
 
-Output:
-
-
-
-
-
-
-
-customer_id
-
-
-
-order_count
-
-
-
-
-
-101
-
-
-
-5
-
-
-
-
-
-103
-
-
-
-3
+Output: Shows customer_id 101 (order_count: 5) and customer_id 103 (order_count: 3).
 
 
 
@@ -334,81 +142,7 @@ SELECT employee_id, department, salary,
        RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS salary_rank
 FROM employees;
 
-Output:
-
-
-
-
-
-
-
-employee_id
-
-
-
-department
-
-
-
-salary
-
-
-
-salary_rank
-
-
-
-
-
-1
-
-
-
-Sales
-
-
-
-80000
-
-
-
-1
-
-
-
-
-
-2
-
-
-
-Sales
-
-
-
-75000
-
-
-
-2
-
-
-
-
-
-3
-
-
-
-IT
-
-
-
-90000
-
-
-
-1
+Output: Shows employee_id 1 (Sales, salary: 80000, rank: 1), employee_id 2 (Sales, salary: 75000, rank: 2), and employee_id 3 (IT, salary: 90000, rank: 1).
 
 
 
@@ -424,41 +158,4 @@ WHERE order_date >= '2023-01-01'
 AND region = 'West';
 -- Index on order_date, region recommended
 
-Output:
-
-
-
-
-
-
-
-customer_id
-
-
-
-amount
-
-
-
-
-
-101
-
-
-
-500
-
-
-
-
-
-104
-
-
-
-700
-
-
-
-
-
+Output: Returns customer_id 101 (amount: 500) and customer_id 104 (amount: 700).
